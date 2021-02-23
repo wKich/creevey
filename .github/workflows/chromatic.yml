@@ -11,7 +11,7 @@ jobs:
       - name: checkout lfs
         run: git lfs checkout
       - name: Install dependencies
-        run: yarn
+        run: npm install
       - name: Deploy to Chromatic
         uses: chromaui/action@v1
         with:

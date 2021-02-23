@@ -5,34 +5,31 @@ orbs:
 jobs:
   build:
     docker:
-      - image: circleci/node:12.18.4
+      - image: circleci/node:15.8.0
 
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: yarn
       - run:
           name: Lint
-          command: yarn lint
+          command: npm run lint
       - run:
           name: Build
-          command: yarn build
+          command: npm run build
       - run:
           name: Pack
-          command: yarn pack -f creevey.tgz
+          command: npm pack
+      - run: mv creevey-* creevey.tgz
       - store_artifacts:
           path: creevey.tgz
 
   e2e:
     docker:
-      - image: circleci/node:12.18.4
+      - image: circleci/node:15.8.0
     steps:
       - checkout
-      - node/install-packages:
-          pkg-manager: yarn
       - run:
           name: E2E tests
-          command: yarn test:e2e
+          command: npm run test:e2e
 
   tests:
     machine:
