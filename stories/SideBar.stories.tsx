@@ -4,7 +4,7 @@ import { CreeveyContext } from '../src/client/web/CreeveyContext';
 import { SideBar } from '../src/client/web/CreeveyView/SideBar';
 import { SideBarHeader } from '../src/client/web/CreeveyView/SideBar/SideBarHeader';
 import { treeifyTests, checkSuite, getTestByPath } from '../src/client/shared/helpers';
-import { noop, CreeveySuite, CreeveyStatus, isDefined, isTest, CreeveyStory } from '../src/types';
+import { noop, CreeveySuite, CreeveyStatus, isDefined, isTest, CreeveyStory, CreeveyStoryParams } from '../src/types';
 import { ensure, styled, ThemeProvider, themes } from '@storybook/theming';
 import { Story } from '@storybook/react';
 
@@ -152,6 +152,17 @@ export const SimpleSideBar: Story & CreeveyStory = () => {
 SimpleSideBar.parameters = {
   creevey: {
     tests: {
+      ...Array(1000)
+        .fill(null)
+        .reduce(
+          (acc: CreeveyStoryParams['tests'], _, i) => ({
+            ...acc,
+            [`test_${i}`]: async function () {
+              await this.expect(await this.takeScreenshot()).to.matchImage();
+            },
+          }),
+          {},
+        ),
       async hover() {
         await this.browser
           .actions()
