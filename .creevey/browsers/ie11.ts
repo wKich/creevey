@@ -1,7 +1,6 @@
 import { BrowserConfig } from '../../src/types';
 
 const config: BrowserConfig = {
-  limit: 5,
   gridUrl: 'https://hub-cloud.browserstack.com/wd/hub',
   browserName: 'IE',
   browserVersion: '11.0',

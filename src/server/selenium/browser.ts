@@ -184,6 +184,17 @@ async function hasScrollBar(browser: WebDriver): Promise<boolean> {
   );
 }
 
+async function resolveCaptureElement(browser: WebDriver): Promise<string | null> {
+  const childrenCount = await browser.executeScript<number>(function () {
+    // eslint-disable-next-line no-var
+    var root = document.getElementById('root');
+    return root ? root.childElementCount : 0;
+  });
+  if (childrenCount == 0) return null;
+  if (childrenCount == 1) return '#root > *';
+  return '#root';
+}
+
 async function takeCompositeScreenshot(
   browser: WebDriver,
   windowRect: ElementRect,
@@ -453,10 +464,13 @@ export async function switchStory(this: Context): Promise<void> {
   if (!story) throw new Error(`Current test '${this.testScope.join('/')}' context doesn't have 'story' field`);
 
   const { id, kind, name, parameters } = story;
-  const { captureElement = '#root', waitForReady, ignoreElements } = (parameters.creevey ?? {}) as CreeveyStoryParams;
+  const creeveyParams = (parameters.creevey ?? {}) as CreeveyStoryParams;
+  const { waitForReady, ignoreElements } = creeveyParams;
 
   await resetMousePosition(this.browser);
   await selectStory(this.browser, { id, kind, name }, waitForReady);
+
+  const { captureElement = await resolveCaptureElement(this.browser) } = creeveyParams;
 
   if (captureElement)
     Object.defineProperty(this, 'captureElement', {
