@@ -63,3 +63,11 @@ export function managerWebpack(config: Configuration, options: CreeveyAddonOptio
       return config;
     });
 }
+
+// TODO Execute build nodejs webpack bundle
+// TODO It depends on watch. How to know it?
+// TODO Or execute it in managerWebpack function
+// TODO Additional check to do not run in recursion
+// TODO quite option, don't proceed any output
+// TODO Save bundle as main.cjs or something
+// TODO What else?
