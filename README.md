@@ -100,7 +100,7 @@ MyModalStory.parameters = { creevey: { captureElement: null } };
 | Test Interaction            | :heavy_check_mark: | :no_entry:         | :warning:          | :heavy_check_mark: | :heavy_check_mark: | :no_entry:         | :no_entry:         |
 | UI Test Runner              | :heavy_check_mark: | :no_entry:         | :no_entry:         | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: | :heavy_check_mark: |
 | Built-in Docker             | :heavy_check_mark: | :heavy_check_mark: | :no_entry:         | :no_entry:         | :heavy_check_mark: | :warning:          | :warning:          |
-| Tests hot-reload            | :heavy_check_mark: | :no_entry:         | :no_entry:         | :no_entry:         | :no_entry:         | :no_entry:         | :no_entry:         |
+| Tests hot-reload            | :heavy_check_mark: | :no_entry:         | :no_entry:         | :heavy_check_mark: | :no_entry:         | :no_entry:         | :no_entry:         |
 | OSS/SaaS                    | OSS                | OSS                | OSS                | OSS                | OSS                | SaaS               | SaaS               |
 
 ## Future plans
